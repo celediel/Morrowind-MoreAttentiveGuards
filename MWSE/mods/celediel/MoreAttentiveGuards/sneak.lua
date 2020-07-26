@@ -50,9 +50,12 @@ local function stopFollowing(onTimer)
     if not follower or not isFollowing then return end
     isFollowing = false
 
+    local wanderRange = common.generateWanderRange(tes3.getPlayerCell())
+    local idles = common.generateIdles()
+
     local function startWander()
         log("%s has probably reached their original destination, resuming wander...", follower.object.name)
-        tes3.setAIWander({reference = follower, range = 2000, reset = false, idles = common.generateIdles()})
+        tes3.setAIWander({reference = follower, range = wanderRange, reset = false, idles = idles})
 
         follower = nil
     end

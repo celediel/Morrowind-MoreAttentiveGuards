@@ -34,6 +34,12 @@ this.generateIdles = function()
     return idles
 end
 
+this.generateWanderRange = function(cell)
+    -- don't wander inside?
+    -- shitty "fix" for stationary NPCs remaining stationary
+    return (cell.isInterior and not cell.behavesAsExterior) and 0 or 2000
+end
+
 this.guardDialogue = function(npc, str, target)
     -- target of the dialogue, either an NPC/Creature, or the player's class or race
     -- this is what %s is replaced with in the dialogue string; npc/creature for combat, player for sneak
