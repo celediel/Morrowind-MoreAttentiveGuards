@@ -159,6 +159,15 @@ this.onCalcMoveSpeed = function(e)
     end
 end
 
+this.onLoaded = function(e)
+    -- some clean-up
+    follower = nil
+    followTimer = nil
+    dialogueTimer = nil
+    ogPosition = nil
+    isFollowing = false
+end
+
 -- }}}
 
 return this
