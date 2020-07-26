@@ -20,6 +20,7 @@ local function calculateFollowTime()
     -- Modified formula from RubberMan's "Inquisitive Guards"
     -- https://www.nexusmods.com/morrowind/mods/46538
     local sneak = tes3.mobilePlayer.sneak.value and tes3.mobilePlayer.sneak.value or tes3.mobilePlayer.sneak.base
+    -- if player sneak is greater than 100, guards won't follow at all
     local max = tes3.hasCodePatchFeature(110) and (sneak <= 100 and 101 or 0) or 101
     local value = (max - sneak) / 3
     -- round to nearest integer
