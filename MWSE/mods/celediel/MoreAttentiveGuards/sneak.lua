@@ -94,6 +94,7 @@ local function startFollowing()
 
     local function startFollow()
         local followTime = calculateFollowTime()
+        if followTime <= 0 then return end
         log("%s starting to follow %s for %s time units", follower.object.name, tes3.player.object.name, followTime)
 
         tes3.setAIFollow({reference = follower, target = tes3.mobilePlayer})
