@@ -28,7 +28,11 @@ local mainCategory = page:createCategory(common.modName)
 
 local generalCategory = mainCategory:createCategory("Common settings")
 
-generalCategory:createDropdown({label = "Language", options = createLanguageOptions(), variable = createTableVar("language")})
+generalCategory:createDropdown({
+    label = "Language",
+    options = createLanguageOptions(),
+    variable = createTableVar("language")
+})
 
 generalCategory:createYesNoButton({
     label = "Debug mode",

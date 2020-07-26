@@ -39,7 +39,7 @@ local function startDialogue()
 
     log("Dialogue roll = %s > %s", config.sneakDialogueChance, roll)
     if config.sneakDialogueChance > roll then
-        local response = common.guardDialogue(follower, dialogue, tes3.mobilePlayer)
+        local response = common.guardDialogue(follower.object.name, dialogue, tes3.mobilePlayer)
         log(response)
     end
 end
@@ -72,7 +72,7 @@ local function stopFollowing(onTimer)
 
         -- send a dialogue to let player know guard doesn't care any more
         if onTimer then
-            local response = common.guardDialogue(follower,
+            local response = common.guardDialogue(follower.object.name,
                                                   table.choice(common.dialogues[config.language].stop_following),
                                                   tes3.mobilePlayer)
             log(response)
@@ -119,7 +119,8 @@ local function startFollowing()
 end
 
 local function abortFollow()
-    local response = common.guardDialogue(follower, table.choice(common.dialogues[config.language].stop_sneaking),
+    local response = common.guardDialogue(follower.object.name,
+                                          table.choice(common.dialogues[config.language].stop_sneaking),
                                           tes3.mobilePlayer)
     log(response)
     stopFollowing(false)

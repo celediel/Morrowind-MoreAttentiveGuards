@@ -5,7 +5,8 @@ local this = {}
 this.modName = "More Attentive Guards" -- or something
 this.author = "Celediel"
 this.version = "1.0.3"
-this.modInfo = [[Guards with some actual spacial awareness!
+this.modInfo = [[Guards with some actual spatial awareness!
+
 Guards who catch you sneaking will follow you for a bit of
 time, and will also come to the player's rescue if attacked unprovoked.]]
 this.dialogues = require("celediel.MoreAttentiveGuards.dialogues")
@@ -43,9 +44,8 @@ this.guardDialogue = function(npc, str, target)
         targetOrPlayer = target.object.name
     end
 
-    local name = npc.object.name
     local message = string.format(str, targetOrPlayer)
-    local output = string.format("%s: %s", name, message)
+    local output = string.format("%s: %s", npc, message)
 
     tes3.messageBox(output)
     return output

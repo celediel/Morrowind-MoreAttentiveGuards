@@ -23,7 +23,8 @@ local function alertGuards(aggressor, cell)
             log("Alerting %s, %s units away, to the combat!", npc.object.name, distance)
 
             if config.combatDialogue then
-                local response = common.guardDialogue(npc, table.choice(common.dialogues[config.language].join_combat),
+                local response = common.guardDialogue(npc.object.name,
+                                                      table.choice(common.dialogues[config.language].join_combat),
                                                       aggressor)
                 log(response)
             end
