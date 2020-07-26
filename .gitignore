@@ -86,3 +86,6 @@ $RECYCLE.BIN/
 [Bb]uild
 
 # End of https://www.toptal.com/developers/gitignore/api/lua,visualstudiocode,windows
+
+*.7z
+*.zip

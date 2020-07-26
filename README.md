@@ -10,6 +10,7 @@ and
 * Guards that catch the player sneaking about in town will follow them for a length of time dependent on their sneak skill.
 * Guards will come to the aid of an unwanted player who is attacked unprovoked
 * MCM Menu for configuration of many options
+* Thanks to the power of MWSE Lua, all guards are affected, not just selected hardcoded guards
 
 ### Dialogue ###
 
