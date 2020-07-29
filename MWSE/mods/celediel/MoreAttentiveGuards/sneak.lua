@@ -50,12 +50,13 @@ local function stopFollowing(onTimer)
     if not follower or not isFollowing then return end
     isFollowing = false
 
-    local wanderRange = common.generateWanderRange(tes3.getPlayerCell())
-    local idles = common.generateIdles()
-
     local function startWander()
-        log("%s has probably reached their original destination, resuming wander...", follower.object.name)
-        tes3.setAIWander({reference = follower, range = wanderRange, reset = false, idles = idles})
+        local wanderRange = common.generateWanderRange(tes3.getPlayerCell())
+        local idles = common.generateIdles()
+
+        log("%s has probably reached their original destination, resuming %s range wander...", follower.object.name,
+            wanderRange)
+        tes3.setAIWander({reference = follower, range = wanderRange, reset = true, idles = idles})
 
         follower = nil
     end
@@ -135,6 +136,7 @@ end
 
 this.onDetectSneak = function(e)
     if not config.sneakEnable then return end
+
     if e.target ~= tes3.mobilePlayer or not tes3.mobilePlayer.isSneaking or not e.detector.object.isGuard then return end
 
     if not isFollowing then
