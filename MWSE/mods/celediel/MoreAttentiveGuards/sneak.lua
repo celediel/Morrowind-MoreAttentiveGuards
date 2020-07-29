@@ -75,7 +75,7 @@ local function stopFollowing(onTimer)
             follower.object.name, tes3.player.object.name, ogPosition, distance, duration)
 
         -- send a dialogue to let player know guard doesn't care any more
-        if onTimer then
+        if onTimer and config.sneakDialogue then
             local response = common.guardDialogue(follower.object.name,
                                                   table.choice(common.dialogues[config.language].stop_following),
                                                   tes3.mobilePlayer)
@@ -123,10 +123,12 @@ local function startFollowing()
 end
 
 local function abortFollow()
-    local response = common.guardDialogue(follower.object.name,
-                                          table.choice(common.dialogues[config.language].stop_sneaking),
-                                          tes3.mobilePlayer)
-    log(response)
+    if config.sneakDialogue then
+        local response = common.guardDialogue(follower.object.name,
+                                              table.choice(common.dialogues[config.language].stop_sneaking),
+                                              tes3.mobilePlayer)
+        log(response)
+    end
     stopFollowing(false)
 end
 
