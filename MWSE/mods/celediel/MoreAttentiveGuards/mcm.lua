@@ -1,6 +1,8 @@
 local config = require("celediel.MoreAttentiveGuards.config").getConfig()
 local common = require("celediel.MoreAttentiveGuards.common")
 
+-- {{{ helper functions
+
 local function createTableVar(id) return mwse.mcm.createTableVariable({id = id, table = config}) end
 
 local function createLanguageOptions()
@@ -14,6 +16,10 @@ local function createLanguageOptions()
     return options
 end
 
+-- }}}
+
+-- {{{ main settings page
+
 local template = mwse.mcm.createTemplate(common.modName)
 template:saveOnClose(common.configString, config)
 
@@ -23,6 +29,8 @@ local page = template:createSideBarPage({
 })
 
 local mainCategory = page:createCategory(common.modName)
+
+-- }}}
 
 -- {{{ general settings
 
