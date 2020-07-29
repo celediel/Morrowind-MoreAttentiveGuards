@@ -5,10 +5,9 @@ local this = {}
 this.modName = "More Attentive Guards" -- or something
 this.author = "Celediel"
 this.version = "1.0.3"
-this.modInfo = [[Guards with some actual spatial awareness!
-
-Guards who catch you sneaking will follow you for a bit of
-time, and will also come to the player's rescue if attacked unprovoked.]]
+this.modInfo = "Guards with some actual spatial awareness!\n\n" ..
+"Guards who catch you sneaking will follow you for a bit of" ..
+"time, and will also come to the player's rescue if attacked unprovoked."
 this.dialogues = require("celediel.MoreAttentiveGuards.dialogues")
 this.configString = string.gsub(this.modName, "%s+", "")
 
@@ -35,9 +34,8 @@ this.generateIdles = function()
 end
 
 this.generateWanderRange = function(cell)
-    -- don't wander inside?
-    -- shitty "fix" for stationary NPCs remaining stationary
-    return (cell.isInterior and not cell.behavesAsExterior) and 0 or 2000
+    -- wander less inside?
+    return (cell.isInterior and not cell.behavesAsExterior) and 200 or 2000
 end
 
 this.guardDialogue = function(npc, str, target)
