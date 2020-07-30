@@ -7,6 +7,15 @@ local this = {}
 
 local function log(...) if config.debug then common.log(...) end end
 
+local function isFriendlyActor(actor)
+    for friend in tes3.iterate(tes3.mobilePlayer.friendlyActors) do
+        if actor.object.id == friend.object.id or actor.object.baseObject.id == friend.object.baseObject.id then
+            return true
+        end
+    end
+    return false
+end
+
 local function alertGuards(aggressor, cell)
     -- a wanted player gets no help
     if tes3.mobilePlayer.bounty > 0 then
@@ -50,6 +59,11 @@ this.onCombatStart = function(e)
     -- in the wilderness and leading them into town
     if tes3.mobilePlayer.inCombat then
         log("Player is in combat, not sure who started it, so not helping.")
+        return
+    end
+
+    if isFriendlyActor(e.actor) then
+        log("Friendly actor, not helping.")
         return
     end
 
