@@ -116,6 +116,17 @@ combatCategory:createYesNoButton({
 
 -- }}}
 
+template:createExclusionsPage({
+    label = "Ignored NPCs/Creatures",
+    description = "Guards will not respond to these NPCs or creatures attacking the player.",
+    showAllBlocked = false,
+    filters = {
+        {label = "NPCs", type = "Object", objectType = tes3.objectType.npc},
+        {label = "Creatures", type = "Object", objectType = tes3.objectType.creature}
+    },
+    variable = createTableVar("ignored")
+})
+
 return template
 
 -- vim:fdm=marker

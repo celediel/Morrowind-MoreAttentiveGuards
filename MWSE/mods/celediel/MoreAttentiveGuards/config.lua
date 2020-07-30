@@ -15,7 +15,8 @@ this.default = {
     -- combat
     combatEnable = true,
     combatDistance = 850,
-    combatDialogue = true
+    combatDialogue = true,
+    ignored = {}
 }
 
 function this.getConfig()

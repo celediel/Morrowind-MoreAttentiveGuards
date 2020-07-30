@@ -62,6 +62,11 @@ this.onCombatStart = function(e)
         return
     end
 
+    if config.ignored[e.actor.object.id] or config.ignored[e.actor.object.baseObject.id] then
+        log("Ignored NPC or creature detected, not helping.")
+        return
+    end
+
     if isFriendlyActor(e.actor) then
         log("Friendly actor, not helping.")
         return
