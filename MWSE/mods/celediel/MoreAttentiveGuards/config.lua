@@ -17,7 +17,8 @@ this.default = {
     combatDistance = 850,
     combatDialogue = true,
     ignored = {
-        ["mer_tgw_guar"] = true
+        ["mer_tgw_guar"] = true,
+        ["mer_tgw_guar_w"] = true
     }
 }
 
