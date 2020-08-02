@@ -1,9 +1,0 @@
-{
-    "Lua.diagnostics.globals": [
-        "mwscript",
-        "mwse",
-        "event",
-        "tes3",
-        "timer"
-    ]
-}
