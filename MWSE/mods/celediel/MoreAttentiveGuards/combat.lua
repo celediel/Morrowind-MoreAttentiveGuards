@@ -45,7 +45,7 @@ local function doChecks(e)
         return false
     end
 
-    if tes3.mobilePlayer.bounty > 0 then
+    if tes3.mobilePlayer.bounty and tes3.mobilePlayer.bounty > 0 then
         log("Player is wanted, ignoring combat.")
         return false
     end
