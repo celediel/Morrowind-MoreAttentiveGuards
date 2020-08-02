@@ -47,7 +47,7 @@ end
 
 -- {{{ returned event functions
 
-this.onCombatStart = function(e)
+this.onCombatStarted = function(e)
     if not config.combatEnable then return end
 
     -- if player initiates combat or combat is not against player, do nothing
