@@ -16,7 +16,9 @@ this.default = {
     combatEnable = true,
     combatDistance = 850,
     combatDialogue = true,
-    ignored = {}
+    ignored = {
+        ["mer_tgw_guar"] = true
+    }
 }
 
 function this.getConfig()
