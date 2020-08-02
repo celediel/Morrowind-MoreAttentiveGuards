@@ -33,7 +33,7 @@ local function doChecks(e)
     if not e.detector.object.isGuard then return false end
     if e.target ~= tes3.mobilePlayer then return false end
 
-    if e.detector.mobile and e.detector.mobile.inCombat then
+    if e.detector.inCombat then
         log("Busy with combat, not following...")
         return false
     end
