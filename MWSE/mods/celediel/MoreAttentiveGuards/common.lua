@@ -4,7 +4,7 @@ local this = {}
 
 this.modName = "More Attentive Guards" -- or something
 this.author = "Celediel"
-this.version = "1.1.1"
+this.version = "1.1.2"
 this.modInfo = "Guards with some actual spatial awareness!\n\n" ..
 "Guards who catch you sneaking will follow you for a bit of" ..
 "time, and will also come to the player's rescue if attacked unprovoked."
