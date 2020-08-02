@@ -23,8 +23,8 @@ local function calculateFollowTime()
     -- if player sneak is 100 or greater, guards won't follow at all
     local max = tes3.hasCodePatchFeature(110) and (sneak <= 100 and 101 or 0) or 101
     local value = (max - sneak) / 3
-    -- round to nearest integer and clamp to positive
-    return math.clamp(math.round(value, 0), 0, math.huge)
+    -- clamp to positive
+    return math.clamp(value, 0, math.huge)
 end
 
 local function doChecks(e)
