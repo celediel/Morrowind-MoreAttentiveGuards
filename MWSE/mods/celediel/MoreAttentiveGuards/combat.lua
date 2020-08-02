@@ -16,13 +16,13 @@ local function isFriendlyActor(actor)
     return false
 end
 
-local function doChecks(e)
+local function doChecks(attacker, target)
     if not config.combatEnable then
         return false
     end
 
     -- if player initiates combat or combat is not against player, do nothing
-    if e.actor == tes3.mobilePlayer or e.target ~= tes3.mobilePlayer then
+    if attacker == tes3.mobilePlayer or target ~= tes3.mobilePlayer then
         return false
     end
 
@@ -35,12 +35,12 @@ local function doChecks(e)
         return false
     end
 
-    if config.ignored[e.actor.object.id] or config.ignored[e.actor.object.baseObject.id] then
+    if config.ignored[attacker.object.id] or config.ignored[attacker.object.baseObject.id] then
         log("Ignored NPC or creature detected, not helping.")
         return false
     end
 
-    if isFriendlyActor(e.actor) then
+    if isFriendlyActor(attacker) then
         log("Friendly actor, not helping.")
         return false
     end
@@ -50,7 +50,15 @@ local function doChecks(e)
         return false
     end
 
-    if e.actor.object.isGuard then
+    -- ? Guards don't know who started it if the player is being attacked with their weapon out ?
+    -- seems to fix weird issue when sneak attacking NPCs in town, guards would kill NPC,
+    -- then player would get murder bounty, so guards would come after player
+    if tes3.mobilePlayer.weaponReady and attacker.object.objectType == tes3.objectType.npc then
+        log("NPC Fight, not sure who started it, not helping.")
+        return false
+    end
+
+    if attacker.object.isGuard then
         log("Guards don't fight guards!")
         return false
     end
@@ -85,7 +93,7 @@ end
 -- {{{ returned event functions
 
 this.onCombatStarted = function(e)
-    if not doChecks(e) then return end
+    if not doChecks(e.actor, e.target) then return end
 
     for _, cell in pairs(tes3.getActiveCells()) do
         alertGuards(e.actor, cell)
