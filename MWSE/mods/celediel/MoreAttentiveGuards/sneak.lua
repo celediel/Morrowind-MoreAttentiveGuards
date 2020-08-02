@@ -27,6 +27,21 @@ local function calculateFollowTime()
     return math.clamp(math.round(value, 0), 0, math.huge)
 end
 
+local function doChecks(e)
+    if not config.sneakEnable then return false end
+    if not tes3.mobilePlayer.isSneaking then return false end
+    if not e.detector.object.isGuard then return false end
+    if e.target ~= tes3.mobilePlayer then return false end
+
+    if e.detector.mobile and e.detector.mobile.inCombat then
+        log("Busy with combat, not following...")
+        return false
+    end
+
+    -- all good
+    return true
+end
+
 -- }}}
 
 -- {{{ timer functions
@@ -137,9 +152,7 @@ end
 -- {{{ returned event functions
 
 this.onDetectSneak = function(e)
-    if not config.sneakEnable then return end
-
-    if e.target ~= tes3.mobilePlayer or not tes3.mobilePlayer.isSneaking or not e.detector.object.isGuard then return end
+    if not doChecks(e) then return end
 
     if not isFollowing then
         log("%s is checking for %s %ssuccessfully", e.detector.object and e.detector.object.name or "no one",
