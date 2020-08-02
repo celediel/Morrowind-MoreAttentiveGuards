@@ -72,12 +72,9 @@ this.onCombatStarted = function(e)
         return
     end
 
-    local cell = tes3.getPlayerCell()
 
-    if cell.isInterior and not cell.behavesAsExterior then
+    for _, cell in pairs(tes3.getActiveCells()) do
         alertGuards(e.actor, cell)
-    else
-        for _, extCell in pairs(tes3.getActiveCells()) do alertGuards(e.actor, extCell) end
     end
 end
 
