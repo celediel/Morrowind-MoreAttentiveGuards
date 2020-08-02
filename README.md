@@ -7,8 +7,14 @@ An MWSE-Lua mod that replicates the features of
 and
 [Protective Guards](http://download.fliggerty.com/download-110-20) by Fliggerty
 
-* Guards that catch the player sneaking about in town will follow them for a length of time dependent on their sneak skill.
+* Guards that catch the player sneaking about in town will follow them for a
+length of time dependent on their sneak skill.
 * Guards will come to the aid of an unwanted player who is attacked unprovoked
+    * If the player has their weapon out when combat with an NPC starts,
+    guards don't know who started it, and will ignore the combat (probably
+    not the best way to handle this, but the few false positives outweigh all
+    the false negatives that would be otherwise)
+    * If the player has a bounty, guards will ignore the combat
 * MCM Menu for configuration of many options
 * Thanks to the power of MWSE Lua, all guards are affected, not just selected hardcoded guards
 
