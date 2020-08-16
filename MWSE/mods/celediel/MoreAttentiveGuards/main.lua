@@ -2,12 +2,16 @@ local sneak = require("celediel.MoreAttentiveGuards.sneak")
 local combat = require("celediel.MoreAttentiveGuards.combat")
 local common = require("celediel.MoreAttentiveGuards.common")
 
-local eventPattern = "on(%u)"
+-- in order for this to work, functions in returned table must follow pattern: onEventName
+local function registerFunctionEvents(t)
+    for name, func in pairs(t) do
+        if type(func) == "function" then event.register(name:gsub("on(%u)", string.lower), func) end
+    end
+end
 
 local function onInitialized()
-    -- in order for this to work, everything in returned table must be functions named onEventName
-    for name, func in pairs(sneak) do event.register(name:gsub(eventPattern, string.lower), func) end
-    for name, func in pairs(combat) do event.register(name:gsub(eventPattern, string.lower), func) end
+    registerFunctionEvents(sneak)
+    registerFunctionEvents(combat)
     common.log("Successfully initialized")
 end
 
