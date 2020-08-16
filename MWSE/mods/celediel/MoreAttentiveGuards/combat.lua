@@ -35,7 +35,8 @@ local function doChecks(attacker, target)
         return false
     end
 
-    if config.ignored[attacker.object.id] or config.ignored[attacker.object.baseObject.id] then
+    local obj = attacker.baseObject and attacker.baseObject or attacker.object
+    if config.ignored[string.lower(obj.id)] then
         log("Ignored NPC or creature detected, not helping.")
         return false
     end
@@ -97,6 +98,17 @@ this.onCombatStarted = function(e)
 
     for _, cell in pairs(tes3.getActiveCells()) do
         alertGuards(e.actor, cell)
+    end
+end
+
+-- hopefully this will stop guards attacking ignored actors
+this.onCombatStart = function(e)
+    local target = e.target.baseObject and e.target.baseObject or e.target.object
+    local attacker = e.actor.baseObject and e.actor.baseObject or e.actor.object
+
+    if config.ignored[string.lower(target.id)] and attacker.isGuard then
+        log("Combat started against %s by a guard, %s... stopping...", target.id, attacker.id)
+        return false
     end
 end
 
