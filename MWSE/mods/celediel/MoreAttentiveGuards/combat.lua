@@ -17,14 +17,10 @@ local function isFriendlyActor(actor)
 end
 
 local function doChecks(attacker, target)
-    if not config.combatEnable then
-        return false
-    end
+    if not config.combatEnable then return false end
 
     -- if player initiates combat or combat is not against player, do nothing
-    if attacker == tes3.mobilePlayer or target ~= tes3.mobilePlayer then
-        return false
-    end
+    if attacker == tes3.mobilePlayer or target ~= tes3.mobilePlayer then return false end
 
     -- inCombat is true after player has taken combat actions
     -- or after combat has gone on awhile, but hopefully the guards will already be attacking by then
@@ -35,7 +31,9 @@ local function doChecks(attacker, target)
         return false
     end
 
-    local obj = attacker.baseObject and attacker.baseObject or attacker.object
+    -- first try baseObject, else try object.baseObject, else settle on object
+    local obj = attacker.baseObject and attacker.baseObject or
+                    (attacker.object.baseObject and attacker.object.baseObject or attacker.object)
     if config.ignored[string.lower(obj.id)] then
         log("Ignored NPC or creature detected, not helping.")
         return false
@@ -96,18 +94,19 @@ end
 this.onCombatStarted = function(e)
     if not doChecks(e.actor, e.target) then return end
 
-    for _, cell in pairs(tes3.getActiveCells()) do
-        alertGuards(e.actor, cell)
-    end
+    for _, cell in pairs(tes3.getActiveCells()) do alertGuards(e.actor, cell) end
 end
 
 -- hopefully this will stop guards attacking ignored actors
 this.onCombatStart = function(e)
-    local target = e.target.baseObject and e.target.baseObject or e.target.object
-    local attacker = e.actor.baseObject and e.actor.baseObject or e.actor.object
+    -- first try baseObject, else try object.baseObject, else settle on object
+    local target = e.target.object.baseObject and e.target.object.baseObject or
+                       (e.target.baseObject and e.target.baseObject or e.target.object)
+    local attacker = e.actor.object.baseObject and e.actor.object.baseObject or
+                         (e.actor.baseObject and e.actor.baseObject or e.actor.object)
 
     if config.ignored[string.lower(target.id)] and attacker.isGuard then
-        log("Combat started against %s by a guard, %s... stopping...", target.id, attacker.id)
+        log("Combat started against %s by a guard, %s... stopping...", e.target.object.name, e.actor.object.name)
         return false
     end
 end
