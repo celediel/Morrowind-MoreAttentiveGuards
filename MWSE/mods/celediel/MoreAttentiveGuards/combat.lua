@@ -97,7 +97,7 @@ this.onCombatStarted = function(e)
     for _, cell in pairs(tes3.getActiveCells()) do alertGuards(e.actor, cell) end
 end
 
--- hopefully this will stop guards attacking ignored actors
+-- this will stop guards from attacking ignored actors ever
 this.onCombatStart = function(e)
     -- first try baseObject, else try object.baseObject, else settle on object
     local target = e.target.object.baseObject and e.target.object.baseObject or
