@@ -22,11 +22,11 @@ local function doChecks(attacker, target)
     -- if player initiates combat or combat is not against player, do nothing
     if attacker == tes3.mobilePlayer or target ~= tes3.mobilePlayer then return false end
 
-    -- inCombat is true after player has taken combat actions
-    -- or after combat has gone on awhile, but hopefully the guards will already be attacking by then
-    -- should be fine in cities, but will prevent players from provoking NPCs
-    -- in the wilderness and leading them into town
-    if tes3.mobilePlayer.inCombat then
+    -- inCombat is true after player has taken combat actions or after combat
+    -- has gone on awhile, but hopefully the guards will already be attacking by
+    -- then. Should be fine in cities, but will prevent players from provoking
+    -- NPCs in the wilderness and leading them into town.
+    if tes3.mobilePlayer.inCombat and attacker.object.objectType == tes3.objectType.npc then
         log("Player is in combat, not sure who started it, so not helping.")
         return false
     end
