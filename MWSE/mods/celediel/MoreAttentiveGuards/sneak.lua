@@ -1,5 +1,6 @@
 local common = require("celediel.MoreAttentiveGuards.common")
 local config = require("celediel.MoreAttentiveGuards.config").getConfig()
+local interop = require("celediel.MoreAttentiveGuards.interop")
 local this = {}
 
 -- {{{ variables and such
@@ -74,6 +75,7 @@ local function stopFollowing(onTimer)
         tes3.setAIWander({reference = follower, range = wanderRange, reset = true, idles = idles})
 
         follower = nil
+        interop.setGuardFollower(follower)
     end
 
     local function startTravel()
@@ -161,6 +163,7 @@ this.onDetectSneak = function(e)
 
     if e.isDetected and not follower and not isFollowing then
         follower = e.detector
+        interop.setGuardFollower(follower)
         -- follow for a time
         startFollowing()
         -- else -- uncomment this for extreme debug messages
@@ -187,6 +190,7 @@ this.onLoaded = function(e)
     dialogueTimer = nil
     ogPosition = nil
     isFollowing = false
+    interop.setGuardFollower(follower)
 end
 
 -- }}}
