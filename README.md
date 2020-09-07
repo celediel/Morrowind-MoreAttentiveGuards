@@ -30,7 +30,7 @@ Open dialogues.lua to edit the dialogues. I'm no writer so they're probably bad,
 
 To add a new language add something like this to dialogues.lua:
 
-```
+```Lua
 ["your language"] = {
         -- guards might say this every so often to players who are sneaking
         -- %s is replaced with race or class
@@ -57,6 +57,16 @@ To add a new language add something like this to dialogues.lua:
 
 The MCM dropdown will automatically be populated with the configured language, and once selected, those dialogues will be used.
 
+## Interop ##
+
+Currently extremely basic. Exposes some data for use in other mods.
+
+```Lua
+local mag = require("celediel.MoreAttentiveGuards.interop")
+
+-- returns tes3reference of currently following guard, or nil if no follower
+local followingGuard = mag.getGuardFollower()
+```
 
 ## Requirements ##
 MWSE 2.1 nightly @ [github](https://github.com/MWSE/MWSE)
