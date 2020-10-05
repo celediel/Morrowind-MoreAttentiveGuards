@@ -121,6 +121,7 @@ template:createExclusionsPage({
     description = "Guards will not respond to these NPCs or creatures attacking the player.",
     showAllBlocked = false,
     filters = {
+        {label = "Plugins", type = "Plugin"},
         {label = "NPCs", type = "Object", objectType = tes3.objectType.npc},
         {label = "Creatures", type = "Object", objectType = tes3.objectType.creature}
     },
