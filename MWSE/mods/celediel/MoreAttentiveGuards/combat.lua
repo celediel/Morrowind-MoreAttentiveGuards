@@ -34,7 +34,7 @@ local function doChecks(attacker, target)
     -- first try baseObject, else try object.baseObject, else settle on object
     local obj = attacker.baseObject and attacker.baseObject or
                     (attacker.object.baseObject and attacker.object.baseObject or attacker.object)
-    if config.ignored[string.lower(obj.id)] then
+    if config.ignored[string.lower(obj.id)] or config.ignored[string.lower(obj.sourceMod)] then
         log("Ignored NPC or creature detected, not helping.")
         return false
     end
@@ -105,7 +105,7 @@ this.onCombatStart = function(e)
     local attacker = e.actor.object.baseObject and e.actor.object.baseObject or
                          (e.actor.baseObject and e.actor.baseObject or e.actor.object)
 
-    if config.ignored[string.lower(target.id)] and attacker.isGuard then
+    if (config.ignored[string.lower(target.id)] or config.ignored[string.lower(target.sourceMod)]) and attacker.isGuard then
         log("Combat started against %s by a guard, %s... stopping...", e.target.object.name, e.actor.object.name)
         return false
     end
