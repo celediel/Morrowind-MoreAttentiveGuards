@@ -72,7 +72,7 @@ local function alertGuards(aggressor, cell)
 
     for npc in cell:iterateReferences(tes3.objectType.npc) do
         local distance = playerPos:distance(npc.position)
-        if npc.object.isGuard and npc.mobile and distance <= config.combatDistance then
+        if not npc.disabled and npc.object.isGuard and npc.mobile and distance <= config.combatDistance then
             log("Alerting %s, %s units away, to the combat!", npc.object.name, distance)
 
             if config.combatDialogue then
