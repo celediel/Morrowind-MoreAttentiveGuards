@@ -89,3 +89,6 @@ $RECYCLE.BIN/
 
 *.7z
 *.zip
+
+# MO2
+meta.ini
