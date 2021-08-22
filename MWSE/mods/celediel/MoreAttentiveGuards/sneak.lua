@@ -34,6 +34,9 @@ local function doChecks(e)
     if not e.detector.object.isGuard then return false end
     if e.target ~= tes3.mobilePlayer then return false end
 
+    -- don't bother following in outside wilderness cells
+    if not tes3.player.cell.restingIsIllegal then return false end
+
     if e.detector.inCombat then
         log("Busy with combat, not following...")
         return false
