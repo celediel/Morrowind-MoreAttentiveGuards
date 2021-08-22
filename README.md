@@ -69,7 +69,7 @@ local followingGuard = mag.getGuardFollower()
 ```
 
 ## Requirements ##
-MWSE 2.1 nightly @ [github](https://github.com/MWSE/MWSE)
+MGE XE with MWSE @ [Nexus Mods](https://www.nexusmods.com/morrowind/mods/41102) \(Make sure you run MWSE-Update.exe\)
 
 ## Credits ##
 
