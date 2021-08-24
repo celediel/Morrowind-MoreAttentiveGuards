@@ -94,12 +94,36 @@ local voices = {
 	["dark elf"] = {
 		f = {
 			["sneaking"] = {
+				{ file = "Hlo_DF165", subtitle = "There are better ways than theft to earn a coin, outlander." },
+				{ file = "Hlo_DF164", subtitle = "I find your crimes distasteful, outlander. Perhaps you should leave." },
+				{ file = "tHlo_DF009", subtitle = "Who do you think you are?" }
 			},
 			["stop_sneaking"] = {
+				{ file = "Srv_DF045", subtitle = "Do not waist my time." },
+				{ file = "Hlo_DF037", subtitle = "Annoying outlanders." },
+				{ file = "Hlo_DF035", subtitle = "Keep moving, scum." },
+				{ file = "tIdl_DF015", subtitle = "Damn foreigners..." }
 			},
 			["stop_following"] = {
+				{ file = "Srv_DF033", subtitle = "I find you foul and disgusting. Leave now." },
+				{ file = "Srv_DF045", subtitle = "Do not waist my time." },
+				{ file = "Hlo_DF094", subtitle = "I've got better things to do, so, if you don't mind, let's move this along." },
+				{ file = "Hlo_DF046", subtitle = "If you'll excuse me, I don't have time for you right now. Or ever." },
+				{ file = "Hlo_DF045", subtitle = "I'm late for an appointment. Hopefully somewhere away from you." },
+				{ file = "Hlo_DF037", subtitle = "Annoying outlanders." },
 			},
 			["join_combat"] = {
+				{ file = "Atk_DF002", subtitle = "Your life's end is approaching." },
+				{ file = "Atk_DF001", subtitle = "Now you die." },
+				{ file = "Atk_DF005", subtitle = "This is the end of you, s'wit." },
+				{ file = "Atk_DF008", subtitle = "You will suffer greatly!" },
+				{ file = "Atk_DF003", subtitle = "Die, fetcher." },
+				{ file = "Atk_DF004", subtitle = "You n'wah!" },
+				{ file = "Hlo_DF027", subtitle = "Filthy s'wit!" },
+				{ file = "Atk_DF013", subtitle = "Surrender your life to me and I will end your pain!" },
+				{ file = "bAtk_DF002", subtitle = "Your head will be my new trophy!" },
+				{ file = "bAtk_DF004", subtitle = "I've fought guars more ferocious than you!" },
+				{ file = "bAtk_DF005", subtitle = "Your cursed bloodline ends here!" },
 			}
 		},
 		m = {
@@ -157,12 +181,33 @@ local voices = {
 	imperial = {
 		f = {
 			["sneaking"] = {
+				{ file = "Srv_IF009", subtitle = "I've got my eye on you." },
+				{ file = "Hlo_IF128", subtitle = "Stay out of trouble and you'll have none from me." },
+				{ file = "Hlo_IF057", subtitle = "Stay out of trouble, and you won't get hurt." },
+				{ file = "Hlo_IF071", subtitle = "Watch your step." },
+				{ file = "Hlo_IF070", subtitle = "Don't try anything funny." },
+				{ file = "Hlo_IF007", subtitle = "Are you here to start trouble, or are you just stupid?"},
+				{ file = "tHlo_IF003", subtitle = "Crime doesn't pay." }
 			},
 			["stop_sneaking"] = {
+				{ file = "Hlo_IF011", subtitle = "So tiresome." },
+				{ file = "Idl_IF002", subtitle = "I don't know if I like this." },
+				{ file = "Hlo_IF006", subtitle = "What a pathetic excuse for a criminal." },
 			},
 			["stop_following"] = {
+				{ file = "Srv_IF021", subtitle = "I think we're done here. Please leave." },
+				{ file = "Hlo_IF011", subtitle = "So tiresome." },
+				{ file = "Hlo_IF006", subtitle = "What a pathetic excuse for a criminal." },
+				{ file = "Hlo_IF000d", subtitle = "I wouldn't waste my time on the likes of you!" },
+				{ file = "bIdl_IF003", subtitle = "My mother warned me about mooks like you." },
+				{ file = "bIdl_IF013", subtitle = "[Wide yawn.]"}
 			},
 			["join_combat"] = {
+				{ file = "Atk_IF010", subtitle = "Die, scoundrel!" },
+				{ file = "Atk_IF014", subtitle = "This is pointless, give in!" },
+				{ file = "Atk_IF005", subtitle = "You won't escape me that easily!" },
+				{ file = "bAtk_IF005", subtitle = "Your head will be my new trophy!" },
+				{ file = "bAtk_IF008", subtitle = "Your cursed bloodline ends here!" },
 			}
 		},
 		m = {
