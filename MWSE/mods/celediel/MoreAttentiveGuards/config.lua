@@ -9,13 +9,13 @@ this.default = {
     debug = false,
     -- sneak
     sneakEnable = true,
-    sneakDialogue = true,
+    sneakDialogue = common.dialogueMode.voice,
     sneakDialogueTimer = 5,
     sneakDialogueChance = 67,
     -- combat
     combatEnable = true,
     combatDistance = 850,
-    combatDialogue = true,
+    combatDialogue = common.dialogueMode.voice,
     ignored = {
         ["mer_tgw_guar"] = true,
         ["mer_tgw_guar_w"] = true

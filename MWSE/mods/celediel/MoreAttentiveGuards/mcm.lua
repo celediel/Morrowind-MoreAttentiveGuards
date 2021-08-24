@@ -3,15 +3,12 @@ local common = require("celediel.MoreAttentiveGuards.common")
 
 -- {{{ helper functions
 
-local function createTableVar(id) return mwse.mcm.createTableVariable({id = id, table = config}) end
+local function createTableVar(id) return mwse.mcm.createTableVariable({ id = id, table = config }) end
 
 local function createLanguageOptions()
     local options = {}
-    -- I guess I don't know how ipairs works
-    local i = 1
-    for name, _ in pairs(common.dialogues) do
-        options[i] = {label = name:gsub("^%l", string.upper), value = name}
-        i = i + 1 -- wtf lua
+    for name, _ in pairs(common.dialogues.text) do
+        options[#options + 1] = { label = name:gsub("^%l", string.upper), value = name }
     end
     return options
 end
@@ -37,7 +34,8 @@ local mainCategory = page:createCategory(common.modName)
 local generalCategory = mainCategory:createCategory("Common settings")
 
 generalCategory:createDropdown({
-    label = "Language",
+    label = "Text Language",
+    description = "If dialogue mode is set to text, this language will be used.",
     options = createLanguageOptions(),
     variable = createTableVar("language")
 })
@@ -60,10 +58,15 @@ sneakCategory:createYesNoButton({
     variable = createTableVar("sneakEnable")
 })
 
-sneakCategory:createYesNoButton({
+sneakCategory:createDropdown({
     label = "Sneak dialogue",
     description = "Guards sometimes say things to you when you sneak.",
-    variable = createTableVar("sneakDialogue")
+    variable = createTableVar("sneakDialogue"),
+    options = {
+        { label = "Text", value = common.dialogueMode.text },
+        { label = "Voice", value = common.dialogueMode.voice },
+        { label = "None", value = common.dialogueMode.none }
+    }
 })
 
 sneakCategory:createSlider({
@@ -108,10 +111,15 @@ combatCategory:createSlider({
     variable = createTableVar("combatDistance")
 })
 
-combatCategory:createYesNoButton({
-    label = "Enable combat dialogue",
+combatCategory:createDropdown({
+    label = "Combat dialogue",
     description = "Guards have things to say when they come to the rescue of a player who is attacked unprovoked.",
-    variable = createTableVar("combatDialogue")
+    variable = createTableVar("combatDialogue"),
+    options = {
+        { label = "Text", value = common.dialogueMode.text },
+        { label = "Voice", value = common.dialogueMode.voice },
+        { label = "None", value = common.dialogueMode.none }
+    }
 })
 
 -- }}}
@@ -121,9 +129,9 @@ template:createExclusionsPage({
     description = "Guards will not respond to these NPCs or creatures attacking the player.",
     showAllBlocked = false,
     filters = {
-        {label = "Plugins", type = "Plugin"},
-        {label = "NPCs", type = "Object", objectType = tes3.objectType.npc},
-        {label = "Creatures", type = "Object", objectType = tes3.objectType.creature}
+        { label = "Plugins", type = "Plugin" },
+        { label = "NPCs", type = "Object", objectType = tes3.objectType.npc },
+        { label = "Creatures", type = "Object", objectType = tes3.objectType.creature }
     },
     variable = createTableVar("ignored")
 })

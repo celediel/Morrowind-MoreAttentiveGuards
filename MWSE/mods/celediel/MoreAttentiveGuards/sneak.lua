@@ -50,16 +50,21 @@ end
 
 -- {{{ timer functions
 
-local function startDialogue()
+local function startDialogue(chance)
     if not follower then return end
 
-    local dialogue = table.choice(common.dialogues[config.language].sneaking)
-    local roll = math.random(0, 100)
+    local roll = type(chance) == "number" and chance or math.random(0, 100)
 
-    log("Dialogue roll = %s > %s", config.sneakDialogueChance, roll)
+    log("Dialogue roll = %s > %s == %s", config.sneakDialogueChance, roll, config.sneakDialogueChance > roll)
     if config.sneakDialogueChance > roll then
-        local response = common.guardDialogue(follower.object.name, dialogue, tes3.mobilePlayer)
-        log(response)
+        if config.sneakDialogue == common.dialogueMode.text then
+            local response = common.playGuardText(follower.object.name, table.choice(common.dialogues.text[config.language].sneaking),
+                                                  tes3.mobilePlayer)
+            log(response)
+        elseif config.sneakDialogue == common.dialogueMode.voice then
+            local response = common.playGuardVoice(follower, "sneaking")
+            log("Playing sound file: %s", response)
+        end
     end
 end
 
@@ -73,9 +78,8 @@ local function stopFollowing(onTimer)
         local wanderRange = common.generateWanderRange(tes3.getPlayerCell())
         local idles = common.generateIdles()
 
-        log("%s has probably reached their original destination, resuming %s range wander...", follower.object.name,
-            wanderRange)
-        tes3.setAIWander({reference = follower, range = wanderRange, reset = true, idles = idles})
+        log("%s has probably reached their original destination, resuming %s range wander...", follower.object.name, wanderRange)
+        tes3.setAIWander({ reference = follower, range = wanderRange, reset = true, idles = idles })
 
         follower = nil
         interop.setGuardFollower(follower)
@@ -91,23 +95,27 @@ local function stopFollowing(onTimer)
         duration = duration > 0 and duration or 1
 
         log("%s has decided that %s isn't doing anything suspicious, heading back to %s... " ..
-                "(which is %s distance units away... it'll probably take %s seconds to get there)",
-            follower.object.name, tes3.player.object.name, ogPosition, distance, duration)
+                "(which is %s distance units away... it'll probably take %s seconds to get there)", follower.object.name,
+            tes3.player.object.name, ogPosition, distance, duration)
 
         -- send a dialogue to let player know guard doesn't care any more
-        if onTimer and config.sneakDialogue then
-            local response = common.guardDialogue(follower.object.name,
-                                                  table.choice(common.dialogues[config.language].stop_following),
-                                                  tes3.mobilePlayer)
-            log(response)
+        if onTimer then
+            if config.sneakDialogue == common.dialogueMode.text then
+                local response = common.playGuardText(follower.object.name, table.choice(common.dialogues[config.language].stop_following),
+                                                      tes3.mobilePlayer)
+                log(response)
+            elseif config.sneakDialogue == common.dialogueMode.voice then
+                local response = common.playGuardVoice(follower, "stop_following")
+                log("Playing sound file: %s", response)
+            end
         end
 
         if dialogueTimer and dialogueTimer.state == timer.active then dialogueTimer:cancel() end
 
-        tes3.setAITravel({reference = follower, destination = ogPosition})
+        tes3.setAITravel({ reference = follower, destination = ogPosition })
         ogPosition = nil
 
-        timer.start({duration = duration, iterations = 1, callback = startWander})
+        timer.start({ duration = duration, iterations = 1, callback = startWander })
     end
 
     timer.delayOneFrame(startTravel)
@@ -121,17 +129,13 @@ local function startFollowing()
         if followTime <= 0 then return end
         log("%s starting to follow %s for %s time units", follower.object.name, tes3.player.object.name, followTime)
 
-        tes3.setAIFollow({reference = follower, target = tes3.mobilePlayer})
+        tes3.setAIFollow({ reference = follower, target = tes3.mobilePlayer })
 
-        followTimer = timer.start({duration = followTime, callback = stopFollowing})
+        followTimer = timer.start({ duration = followTime, callback = stopFollowing })
 
-        if config.sneakDialogue then
-            startDialogue()
-            dialogueTimer = timer.start({
-                duration = config.sneakDialogueTimer,
-                iterations = -1,
-                callback = startDialogue
-            })
+        if config.sneakDialogue ~= common.dialogueMode.none then
+            startDialogue(0) -- always say something the first time
+            dialogueTimer = timer.start({ duration = config.sneakDialogueTimer, iterations = -1, callback = startDialogue })
         end
 
         isFollowing = true
@@ -143,11 +147,14 @@ local function startFollowing()
 end
 
 local function abortFollow()
-    if config.sneakDialogue then
-        local response = common.guardDialogue(follower.object.name,
-                                              table.choice(common.dialogues[config.language].stop_sneaking),
+    -- send a dialogue to let player know guard doesn't care any more
+    if config.sneakDialogue == common.dialogueMode.text then
+        local response = common.playGuardText(follower.object.name, table.choice(common.dialogues.text[config.language].stop_sneaking),
                                               tes3.mobilePlayer)
         log(response)
+    elseif config.sneakDialogue == common.dialogueMode.voice then
+        local response = common.playGuardVoice(follower, "stop_sneaking")
+        log("Playing sound file: %s", response)
     end
     stopFollowing(false)
 end

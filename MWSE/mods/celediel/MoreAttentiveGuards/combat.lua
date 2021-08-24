@@ -9,9 +9,7 @@ local function log(...) if config.debug then common.log(...) end end
 
 local function isFriendlyActor(actor)
     for friend in tes3.iterate(tes3.mobilePlayer.friendlyActors) do
-        if actor.object.id == friend.object.id or actor.object.baseObject.id == friend.object.baseObject.id then
-            return true
-        end
+        if actor.object.id == friend.object.id or actor.object.baseObject.id == friend.object.baseObject.id then return true end
     end
     return false
 end
@@ -80,11 +78,13 @@ local function alertGuards(aggressor, cell)
         if not npc.disabled and npc.object.isGuard and npc.mobile and distance <= config.combatDistance then
             log("Alerting %s, %s units away, to the combat!", npc.object.name, distance)
 
-            if config.combatDialogue then
-                local response = common.guardDialogue(npc.object.name,
-                                                      table.choice(common.dialogues[config.language].join_combat),
+            if config.combatDialogue == common.dialogueMode.text then
+                local response = common.playGuardText(npc.object.name, table.choice(common.dialogues.text[config.language].join_combat),
                                                       aggressor)
                 log(response)
+            elseif config.combatDialogue == common.dialogueMode.voice then
+                local response = common.playGuardVoice(npc.mobile, "join_combat")
+                log("Playing sound file: %s", response)
             end
 
             npc.mobile:startCombat(aggressor)
