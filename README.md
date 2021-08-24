@@ -18,7 +18,7 @@ length of time dependent on their sneak skill.
 * MCM Menu for configuration of many options
 * Thanks to the power of MWSE Lua, all guards are affected, not just selected hardcoded guards
 
-### Dialogue ###
+### Text Dialogue ###
 
 * Guards will say things:
     * While the player is sneaking, on a chance based timer
@@ -26,7 +26,7 @@ length of time dependent on their sneak skill.
     * When the guard gets bored of following the player
     * When coming to the aid of an unwanted player who is attacked unprovoked
 
-Open dialogues.lua to edit the dialogues. I'm no writer so they're probably bad, but the framework is there for the dialogues to be easily edited or translated. 
+Open dialogues/text.lua to edit the dialogues. I'm no writer so they're probably bad, but the framework is there for the dialogues to be easily edited or translated. 
 
 To add a new language add something like this to dialogues.lua:
 
