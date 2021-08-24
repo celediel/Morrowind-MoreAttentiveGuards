@@ -122,6 +122,11 @@ local voices = {
 				{file = "Hlo_DM000c", subtitle = "Hmmph."},
 			},
 			["join_combat"] = {
+				{file = "CrAtk_AM005", subtitle = "Die!"},
+				{file = "CrAtk_AM005", subtitle = "Die!"},
+				{file = "Atk_DM005", subtitle = "This is the end of you, s'wit."},
+				{file = "Atk_DM002", subtitle = "Your life's end is approaching."},
+				{file = "Atk_DM001", subtitle = "Now you die."}
 			}
 		},
 		dir = "d"
