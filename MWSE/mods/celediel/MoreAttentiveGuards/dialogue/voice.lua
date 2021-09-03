@@ -71,22 +71,56 @@ local voices = {
 	breton = {
 		f = {
 			["sneaking"] = {
+				{ file = "Srv_BF006.mp3", subtitle = "I don't like you here, outlander." },
+				{ file = "Hlo_BF026.mp3", subtitle = "Well, this should be interesting." },
+				{ file = "Hlo_BF106.mp3", subtitle = "You would be wise to give up crime. It doesn't suit you." },
 			},
 			["stop_sneaking"] = {
+				{ file = "Srv_BF024.mp3", subtitle = "Do not waste my time." },
+				{ file = "Idl_BF001.mp3", subtitle = "What was that about?" },
 			},
 			["stop_following"] = {
+				{ file = "Srv_BF024.mp3", subtitle = "Do not waste my time." },
+				{ file = "Srv_BF003.mp3", subtitle = "You are repulsive, please go away." },
+				{ file = "Hlo_BF025.mp3", subtitle = "No, I don't have time for you." },
+				{ file = "Hlo_BF001.mp3", subtitle = "I think you should go elsewhere." },
+				{ file = "Hlo_BF056.mp3", subtitle = "I am busy, so, if you will excuse me." },
 			},
 			["join_combat"] = {
+				{ file = "Atk_BF013.mp3", subtitle = "I should have killed you sooner!" },
+				{ file = "Atk_BF009.mp3", subtitle = "Soon you'll be reduced to dust!" },
+				{ file = "Atk_BF006.mp3", subtitle = "Death awaits you!" },
+				{ file = "Atk_BF004.mp3", subtitle = "You'll be dead soon!" },
+				{ file = "Atk_BF008.mp3", subtitle = "You should have run while you had a chance!" },
 			}
 		},
 		m = {
 			["sneaking"] = {
+				{ file = "Flw_BM001.mp3", subtitle = "Where are you going?" },
+				{ file = "Hlo_BM105.mp3", subtitle = "You'd be wise to stay out of trouble, friend." },
+				{ file = "Hlo_BM106.mp3", subtitle = "You would be wise to give up crime. It doesn't suit you." },
+				{ file = "Srv_BM006.mp3", subtitle = "I'm watching you." },
 			},
 			["stop_sneaking"] = {
+				{ file = "Hlo_BM025.mp3", subtitle = "I don't have time for you." },
+				{ file = "Srv_BM012.mp3", subtitle = "Do not waste my time." },
+				{ file = "Hlo_BM017.mp3", subtitle = "What a revolting display." },
+				{ file = "Hlo_BM000b.mp3", subtitle = "Humph." },
+				{ file = "Hlo_BM000c.mp3", subtitle = "Humph." },
 			},
 			["stop_following"] = {
+				{ file = "Hlo_BM029.mp3", subtitle = "This is becoming most unpleasant." },
+				{ file = "Hlo_BM028.mp3", subtitle = "You are beginning to annoy me." },
+				{ file = "Hlo_BM025.mp3", subtitle = "I don't have time for you." },
+				{ file = "Srv_BM012.mp3", subtitle = "Do not waste my time." },
+				{ file = "Srv_BM003.mp3", subtitle = "You are repulsive. Please, go away." },
 			},
 			["join_combat"] = {
+				{ file = "CrAtk_BM005.mp3", subtitle = "Die!" },
+				{ file = "Atk_BM013.mp3", subtitle = "I should have killed you sooner!" },
+				{ file = "Atk_BM009.mp3", subtitle = "Soon you'll be reduced to dust!" },
+				{ file = "Atk_BM006.mp3", subtitle = "Death awaits you!" },
+				{ file = "Atk_BM004.mp3", subtitle = "You'll be dead soon!" },
 			}
 		},
 		dir = "b"
