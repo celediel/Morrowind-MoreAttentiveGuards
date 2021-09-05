@@ -58,6 +58,8 @@ this.playGuardText = function(npc, str, target)
     return output
 end
 
+local ordinator = "ordinator"
+
 -- Plays a random sound of specified type and returns the path of the sound file that was played
 this.playGuardVoice = function(mobile, type)
     local distanceCap = 2500 --  sounds further away than this are too quiet to be heard
@@ -66,9 +68,18 @@ this.playGuardVoice = function(mobile, type)
     local race = ref.baseObject.race.id:lower()
     local directory, soundPath, sound
 
+    -- ordinators have special voices, so here's some hacky shit to incorporate them
+    if not ref.baseObject.female and (ref.id:lower():match(ordinator) or ref.object.class.id:lower():match(ordinator)) then
+        race = ordinator
+    end
+
     -- make sure the race/sex/type combo exists in the voice data
     if this.dialogues.voice[race] and this.dialogues.voice[race][sex] and this.dialogues.voice[race][sex][type] then
-        directory = string.format("vo\\%s\\%s\\", this.dialogues.voice[race].dir, sex)
+        if race == ordinator then
+            directory = string.format("vo\\%s\\", this.dialogues.voice[race].dir)
+        else
+            directory = string.format("vo\\%s\\%s\\", this.dialogues.voice[race].dir, sex)
+        end
         sound = table.choice(this.dialogues.voice[race][sex][type])
         -- sound will be nil if the race/sex/type combo is an empty table
         if sound then soundPath = directory .. sound.file end

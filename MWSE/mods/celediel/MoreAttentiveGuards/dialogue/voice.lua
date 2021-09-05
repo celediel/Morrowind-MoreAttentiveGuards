@@ -594,6 +594,35 @@ local voices = {
             }
         },
         dir = "w"
+    },
+    ordinator = {
+        m = {
+            ["sneaking"] = {
+                { file = "Hlo_ORM008.mp3", subtitle = "Watch yourself. We'll have no trouble here." },
+                { file = "Hlo_ORM004.mp3", subtitle = "If you're here for trouble, you'll get more than you bargained for." },
+                { file = "Hlo_ORM003.mp3", subtitle = "We're watching you. Scum." }
+            },
+            ["stop_sneaking"] = {
+                { file = "Hlo_ORM001.mp3", subtitle = "Grrrr." },
+                { file = "Hlo_ORM009.mp3", subtitle = "Go on about your business." },
+                { file = "Hlo_ORM007.mp3", subtitle = "Keep moving." },
+                { file = "Hlo_ORM011.mp3", subtitle = "Move along." },
+            },
+            ["stop_following"] = {
+                { file = "Hlo_ORM011.mp3", subtitle = "Move along." },
+                { file = "Hlo_ORM009.mp3", subtitle = "Go on about your business." },
+                { file = "Hlo_ORM007.mp3", subtitle = "Keep moving." },
+                { file = "Hlo_ORM002.mp3", subtitle = "Go. Now." }
+            },
+            ["join_combat"] = {
+                { file = "Atk_ORM002.mp3", subtitle = "Fool!" },
+                { file = "Atk_ORM003.mp3", subtitle = "You have sealed your fate!" },
+                { file = "Atk_ORM004.mp3", subtitle = "You cannot escape the righteous!" },
+                { file = "Atk_ORM005.mp3", subtitle = "You will pay with your blood!" },
+                { file = "Atk_ORM001.mp3", subtitle = "May our Lords be merciful!" }
+            }
+        },
+        dir = "ord"
     }
 }
 
