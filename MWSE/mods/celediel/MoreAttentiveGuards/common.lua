@@ -72,7 +72,7 @@ this.playGuardVoice = function(mobile, type)
         directory = string.format("vo\\%s\\%s\\", this.dialogues.voice[race].dir, sex)
         sound = table.choice(this.dialogues.voice[race][sex][type])
         -- sound will be nil if the race/sex/type combo is an empty table
-        if sound then soundPath = directory .. sound.file .. ".mp3" end
+        if sound then soundPath = directory .. sound.file end
     end
     this.log("after: ref:%s sex:%s race:%s soundPath:%s type:%s", ref.id, sex, race, soundPath, type)
 
