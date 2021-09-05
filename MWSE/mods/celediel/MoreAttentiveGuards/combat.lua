@@ -14,7 +14,7 @@ local function isFriendlyActor(actor)
     return false
 end
 
-local function doChecks(attacker, target)
+local function combatChecks(attacker, target)
     if not config.combatEnable then return false end
 
     -- if player initiates combat or combat is not against player, do nothing
@@ -69,14 +69,36 @@ local function doChecks(attacker, target)
     return true
 end
 
+local function guardChecks(guard)
+    local name = guard.object.name
+    local distance = tes3.mobilePlayer.position:distance(guard.position)
+
+    if not guard.object.isGuard then return false end
+
+    if guard.disabled then
+        log("Disabled guard %s, not alerting", name)
+        return false
+    end
+
+    if not guard.mobile or guard.mobile.isDead then
+        log("Dead guard %s, not alerting", name)
+        return false
+    end
+
+    if distance > config.combatDistance then
+        log("%s is too far away (%s units), not alerting", name, distance)
+        return false
+    end
+
+    -- everything checked out
+    return true
+end
+
 local function alertGuards(aggressor, cell)
     log("Checking for guards in cell %s to bring justice to %s", cell.name or cell.id, aggressor.object.name)
-    local playerPos = tes3.mobilePlayer.position
-
     for npc in cell:iterateReferences(tes3.objectType.npc) do
-        local distance = playerPos:distance(npc.position)
-        if not npc.disabled and npc.object.isGuard and npc.mobile and distance <= config.combatDistance then
-            log("Alerting %s, %s units away, to the combat!", npc.object.name, distance)
+        if guardChecks(npc) then
+            log("Alerting %s to the combat!", npc.object.name)
 
             if config.combatDialogue == common.dialogueMode.text then
                 local response = common.playGuardText(npc.object.name, table.choice(common.dialogues.text[config.language].join_combat),
@@ -97,7 +119,7 @@ end
 -- {{{ returned event functions
 
 this.onCombatStarted = function(e)
-    if not doChecks(e.actor, e.target) then return end
+    if not combatChecks(e.actor, e.target) then return end
 
     for _, cell in pairs(tes3.getActiveCells()) do alertGuards(e.actor, cell) end
 end
