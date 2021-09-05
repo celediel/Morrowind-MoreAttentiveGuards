@@ -8,7 +8,11 @@ local voices = {
             ["sneaking"] = {
                 { file = "Hlo_AF000a.mp3", subtitle = "What?" },
                 { file = "Idl_AF007.mp3", subtitle = "What was that?" },
-                { file = "Idl_AF001.mp3", subtitle = "Sniff." }
+                { file = "Idl_AF001.mp3", subtitle = "Sniff." },
+                { file = "Hlo_AF107.mp3", subtitle = "Your crimes are known to us." },
+                { file = "Hlo_AF106.mp3", subtitle = "You make a name for yourself, criminal." },
+                { file = "Hlo_AF040.mp3", subtitle = "Is there nothing for you to do?" },
+                { file = "Hlo_AF027.mp3", subtitle = "Must you make a pest of yourself?" }
             },
             ["stop_sneaking"] = {
                 { file = "Srv_AF003.mp3", subtitle = "You should leave." },
@@ -77,7 +81,10 @@ local voices = {
             },
             ["stop_sneaking"] = {
                 { file = "Srv_BF024.mp3", subtitle = "Do not waste my time." },
-                { file = "Idl_BF001.mp3", subtitle = "What was that about?" }
+                { file = "Idl_BF001.mp3", subtitle = "What was that about?" },
+                { file = "Hlo_BF017.mp3", subtitle = "What a revolting display." },
+                { file = "Hlo_BF000b.mp3", subtitle = "Humph." },
+                { file = "Hlo_BF000c.mp3", subtitle = "Humph." }
             },
             ["stop_following"] = {
                 { file = "Srv_BF024.mp3", subtitle = "Do not waste my time." },
