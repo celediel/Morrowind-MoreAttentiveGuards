@@ -84,7 +84,7 @@ local function alertGuards(aggressor, cell)
                 log(response)
             elseif config.combatDialogue == common.dialogueMode.voice then
                 local response = common.playGuardVoice(npc.mobile, "join_combat")
-                log("Playing sound file: %s", response)
+                log("Playing sound file %s because join_combat", response)
             end
 
             npc.mobile:startCombat(aggressor)

@@ -63,7 +63,7 @@ local function startDialogue(chance)
             log(response)
         elseif config.sneakDialogue == common.dialogueMode.voice then
             local response = common.playGuardVoice(follower, "sneaking")
-            log("Playing sound file: %s", response)
+            log("Playing sound file %s because sneaking", response)
         end
     end
 end
@@ -106,7 +106,7 @@ local function stopFollowing(onTimer)
                 log(response)
             elseif config.sneakDialogue == common.dialogueMode.voice then
                 local response = common.playGuardVoice(follower, "stop_following")
-                log("Playing sound file: %s", response)
+                log("Playing sound file %s because stop_following", response)
             end
         end
 
@@ -154,7 +154,7 @@ local function abortFollow()
         log(response)
     elseif config.sneakDialogue == common.dialogueMode.voice then
         local response = common.playGuardVoice(follower, "stop_sneaking")
-        log("Playing sound file: %s", response)
+        log("Playing sound file %s because stop_sneaking", response)
     end
     stopFollowing(false)
 end

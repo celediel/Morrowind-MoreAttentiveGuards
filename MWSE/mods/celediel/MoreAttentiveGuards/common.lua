@@ -65,7 +65,6 @@ this.playGuardVoice = function(mobile, type)
     local sex = ref.baseObject.female and "f" or "m"
     local race = ref.baseObject.race.id:lower()
     local directory, soundPath, sound
-    this.log("before: ref:%s sex:%s race:%s soundPath:%s type:%s", ref.id, sex, race, soundPath, type)
 
     -- make sure the race/sex/type combo exists in the voice data
     if this.dialogues.voice[race] and this.dialogues.voice[race][sex] and this.dialogues.voice[race][sex][type] then
@@ -74,7 +73,6 @@ this.playGuardVoice = function(mobile, type)
         -- sound will be nil if the race/sex/type combo is an empty table
         if sound then soundPath = directory .. sound.file end
     end
-    this.log("after: ref:%s sex:%s race:%s soundPath:%s type:%s", ref.id, sex, race, soundPath, type)
 
     local distanceFromPlayer = math.clamp(mobile.position:distance(tes3.mobilePlayer.position), 0, distanceCap) or 0
     local volume = 1 - (distanceFromPlayer / distanceCap)
