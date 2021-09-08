@@ -14,12 +14,15 @@ this.default = {
     sneakDialogueChance = 67,
     -- combat
     combatEnable = true,
+    factionMembersHelp = true,
+    factionMembersHelpRank = 1,
     combatDistance = 850,
     combatDialogue = common.dialogueMode.voice,
     ignored = {
         ["mer_tgw_guar"] = true,
         ["mer_tgw_guar_w"] = true
-    }
+    },
+    ignoredFactions = {}
 }
 
 function this.getConfig()

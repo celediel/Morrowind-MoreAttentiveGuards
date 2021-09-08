@@ -69,19 +69,28 @@ local function combatChecks(attacker, target)
     return true
 end
 
-local function guardChecks(guard)
-    local name = guard.object.name
-    local distance = tes3.mobilePlayer.position:distance(guard.position)
+local function genericNPCChecks(npc)
+    local name = npc.object.name
+    local distance = tes3.mobilePlayer.position:distance(npc.position)
+    -- log("Checking out %s (%s) %s away from player in cell %s", name, npc.object.id, distance, npc.cell)
 
-    if not guard.object.isGuard then return false end
-
-    if guard.disabled then
-        log("Disabled guard %s, not alerting", name)
+    if npc.disabled then
+        log("Disabled helper %s, not alerting", name)
         return false
     end
 
-    if not guard.mobile or guard.mobile.isDead then
-        log("Dead guard %s, not alerting", name)
+    if not npc.mobile then
+        log("%s doesn't have mobile, can't alert", name)
+        return false
+    end
+
+    if npc.mobile.isDead then
+        log("Dead helper %s, not alerting", name)
+        return false
+    end
+
+    if npc.mobile.inCombat then
+        log("%s already in combat, not alerting", name)
         return false
     end
 
@@ -94,10 +103,45 @@ local function guardChecks(guard)
     return true
 end
 
-local function alertGuards(aggressor, cell)
+local function guardChecks(npc)
+    if not npc.object.isGuard then return false end
+
+    if not genericNPCChecks(npc) then return false end
+
+    -- doin' swell
+    return true
+end
+
+local function factionHelperChecks(npc)
+    if not config.factionMembersHelp then return false end
+
+    if not genericNPCChecks(npc) then return false end
+
+    -- now that that's out of the way
+    local name = npc.object.name
+    local npcFaction = npc.object.faction
+
+    if not npcFaction then return false end
+    if not npcFaction.playerJoined then return false end
+
+    if config.ignoredFactions[npcFaction.id] then
+        log("Ignored faction %s, not alerting %s", npcFaction, name)
+        return false
+    end
+
+    if npcFaction.playerRank < config.factionMembersHelpRank then
+        log("Player not high enough rank in faction %s, %s care enough to help", npcFaction, name)
+        return false
+    end
+
+    -- hell yeah
+    return true
+end
+
+local function alertHelpers(aggressor, cell)
     log("Checking for guards in cell %s to bring justice to %s", cell.name or cell.id, aggressor.object.name)
     for npc in cell:iterateReferences(tes3.objectType.npc) do
-        if guardChecks(npc) then
+        if guardChecks(npc) or factionHelperChecks(npc) then
             log("Alerting %s to the combat!", npc.object.name)
 
             if config.combatDialogue == common.dialogueMode.text then
@@ -121,7 +165,7 @@ end
 this.onCombatStarted = function(e)
     if not combatChecks(e.actor, e.target) then return end
 
-    for _, cell in pairs(tes3.getActiveCells()) do alertGuards(e.actor, cell) end
+    for _, cell in pairs(tes3.getActiveCells()) do alertHelpers(e.actor, cell) end
 end
 
 -- this will stop guards from attacking ignored actors ever
@@ -133,7 +177,7 @@ this.onCombatStart = function(e)
                          (e.actor.baseObject and e.actor.baseObject or e.actor.object)
 
     if (config.ignored[string.lower(target.id)] or config.ignored[string.lower(target.sourceMod)]) and attacker.isGuard then
-        log("Combat started against %s by a guard, %s... stopping...", e.target.object.name, e.actor.object.name)
+        log("Combat started against ignored %s by helper %s... stopping...", e.target.object.name, e.actor.object.name)
         return false
     end
 end

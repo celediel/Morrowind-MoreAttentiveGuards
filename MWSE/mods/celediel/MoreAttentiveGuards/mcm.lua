@@ -97,13 +97,29 @@ local combatCategory = mainCategory:createCategory("Combat Settings")
 
 combatCategory:createYesNoButton({
     label = "Enable combat module",
-    description = "Guards will come to the rescue of a player who is attacked unprovoked.",
+    description = "Guards (and optionally faction members) will come to the rescue of a player who is attacked unprovoked.",
     variable = createTableVar("combatEnable")
 })
 
+combatCategory:createYesNoButton({
+    label = "Faction members help too",
+    description = "NPCs who are in the same faction as the player will also assist in combat.",
+    variable = createTableVar("factionMembersHelp")
+})
+
 combatCategory:createSlider({
-    label = "Guard alert range",
-    description = "How far away guards are alerted to combat against the player",
+    label = "Faction rank required for help",
+    description = "If the player is less than the configured rank, faction members will not help out.",
+    min = 0,
+    max = 10,
+    step = 1,
+    jump = 5,
+    variable = createTableVar("factionMembersHelpRank")
+})
+
+combatCategory:createSlider({
+    label = "Combat alert range",
+    description = "How far away helpers are alerted to combat against the player",
     min = 1,
     max = 20000,
     step = 10,
@@ -113,7 +129,7 @@ combatCategory:createSlider({
 
 combatCategory:createDropdown({
     label = "Combat dialogue",
-    description = "Guards have things to say when they come to the rescue of a player who is attacked unprovoked.",
+    description = "Helpers have things to say when they come to the rescue of a player who is attacked unprovoked.",
     variable = createTableVar("combatDialogue"),
     options = {
         { label = "Text", value = common.dialogueMode.text },
@@ -134,6 +150,24 @@ template:createExclusionsPage({
         { label = "Creatures", type = "Object", objectType = tes3.objectType.creature }
     },
     variable = createTableVar("ignored")
+})
+
+template:createExclusionsPage({
+    label = "Ignored factions",
+    description = "Members of these factions will not help the player in combat",
+    showAllBlocked = false,
+    filters = {
+        { label = "Factions", callback = function()
+            local factions = {}
+
+            for _, faction in pairs(tes3.dataHandler.nonDynamicData.factions) do
+                table.insert(factions, faction.id)
+            end
+
+            return factions
+        end }
+    },
+    variable = createTableVar("ignoredFactions")
 })
 
 return template
