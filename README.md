@@ -3,9 +3,10 @@
 ## About ##
 
 An MWSE-Lua mod that replicates the features of
-[Inquisitive Guards](https://www.nexusmods.com/morrowind/mods/46538) by RubberMan
+[Inquisitive Guards](https://www.nexusmods.com/morrowind/mods/46538) by RubberMan,
+[Protective Guards](http://download.fliggerty.com/download-110-20) by Fliggerty,
 and
-[Protective Guards](http://download.fliggerty.com/download-110-20) by Fliggerty
+[Protective Factions](https://www.nexusmods.com/morrowind/mods/50221) by Jay-D
 
 * Guards that catch the player sneaking about in town will follow them for a
 length of time dependent on their sneak skill.
@@ -15,6 +16,8 @@ length of time dependent on their sneak skill.
     not the best way to handle this, but the few false positives outweigh all
     the false negatives that would be otherwise)
     * If the player has a bounty, guards will ignore the combat
+* Option exists for faction members to aid the player in combat as well, with
+a configurable faction rank required for help to be given
 * MCM Menu for configuration of many options
 * Thanks to the power of MWSE Lua, all guards are affected, not just selected hardcoded guards
 
