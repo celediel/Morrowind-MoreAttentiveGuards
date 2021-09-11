@@ -69,7 +69,7 @@ local voices = {
                 { file = "vo\\a\\m\\Atk_AM013.mp3", subtitle = "Suffer!" },
                 { file = "vo\\a\\m\\Atk_AM014.mp3", subtitle = "Die!" }
             }
-        },
+        }
     },
     breton = {
         female = {
@@ -128,7 +128,7 @@ local voices = {
                 { file = "vo\\b\\m\\Atk_BM006.mp3", subtitle = "Death awaits you!" },
                 { file = "vo\\b\\m\\Atk_BM004.mp3", subtitle = "You'll be dead soon!" }
             }
-        },
+        }
     },
     ["dark elf"] = {
         female = {
@@ -191,7 +191,7 @@ local voices = {
                 { file = "vo\\d\\m\\Atk_DM002.mp3", subtitle = "Your life's end is approaching." },
                 { file = "vo\\d\\m\\Atk_DM001.mp3", subtitle = "Now you die." }
             }
-        },
+        }
     },
     ["high elf"] = {
         female = {
@@ -247,7 +247,7 @@ local voices = {
                 { file = "vo\\h\\m\\Atk_HM012.mp3", subtitle = "Embrace your demise!" },
                 { file = "vo\\h\\m\\Atk_HM007.mp3", subtitle = "You will die in disgrace." }
             }
-        },
+        }
     },
     imperial = {
         female = {
@@ -306,7 +306,7 @@ local voices = {
                 { file = "vo\\i\\m\\Hlo_IM018.mp3", subtitle = "You're a disgrace to the Empire." },
                 { file = "vo\\i\\m\\Hlo_IM000d.mp3", subtitle = "You're about to find more trouble than you can possibly imagine." }
             }
-        },
+        }
     },
     khajiit = {
         female = {
@@ -362,7 +362,7 @@ local voices = {
                 { file = "vo\\k\\m\\Atk_KM010.mp3", subtitle = "So small and tasty. I will enjoy eating you." },
                 { file = "vo\\k\\m\\bAtk_KM004.mp3", subtitle = "I’ve fought guars more ferocious than you!" }
             }
-        },
+        }
     },
     nord = {
         female = {
@@ -417,7 +417,7 @@ local voices = {
                 { file = "vo\\n\\m\\Atk_NM004.mp3", subtitle = "Fool!" },
                 { file = "vo\\n\\m\\bAtk_NM002.mp3", subtitle = "Your cursed bloodline ends here!" }
             }
-        },
+        }
     },
     orc = {
         female = {
@@ -471,7 +471,7 @@ local voices = {
                 { file = "vo\\o\\m\\Atk_OM011.mp3", subtitle = "I will kill you quickly." },
                 { file = "vo\\o\\m\\Atk_OM013.mp3", subtitle = "Your bones will be my dinner." }
             }
-        },
+        }
     },
     redguard = {
         female = {
@@ -529,7 +529,7 @@ local voices = {
                 { file = "vo\\r\\m\\Atk_RM014.mp3", subtitle = "Here it comes!" },
                 { file = "vo\\r\\m\\Atk_RM007.mp3", subtitle = "Run while you can." }
             }
-        },
+        }
     },
     ["wood elf"] = {
         female = {
@@ -583,7 +583,7 @@ local voices = {
                 { file = "vo\\w\\m\\Atk_WM009.mp3", subtitle = "One of us will die here and it won't be me." },
                 { file = "vo\\w\\m\\Atk_WM008.mp3", subtitle = "Run while you can." }
             }
-        },
+        }
     },
     ordinator = {
         male = {
@@ -596,7 +596,7 @@ local voices = {
                 { file = "vo\\ord\\Hlo_ORM001.mp3", subtitle = "Grrrr." },
                 { file = "vo\\ord\\Hlo_ORM009.mp3", subtitle = "Go on about your business." },
                 { file = "vo\\ord\\Hlo_ORM007.mp3", subtitle = "Keep moving." },
-                { file = "vo\\ord\\Hlo_ORM011.mp3", subtitle = "Move along." },
+                { file = "vo\\ord\\Hlo_ORM011.mp3", subtitle = "Move along." }
             },
             ["stop_following"] = {
                 { file = "vo\\ord\\Hlo_ORM011.mp3", subtitle = "Move along." },
@@ -611,7 +611,7 @@ local voices = {
                 { file = "vo\\ord\\Atk_ORM005.mp3", subtitle = "You will pay with your blood!" },
                 { file = "vo\\ord\\Atk_ORM001.mp3", subtitle = "May our Lords be merciful!" }
             }
-        },
+        }
     }
 }
 
