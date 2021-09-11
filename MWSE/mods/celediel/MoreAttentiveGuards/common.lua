@@ -65,9 +65,9 @@ local ordinator = "ordinator"
 this.playGuardVoice = function(mobile, type)
     local distanceCap = 2500 --  sounds further away than this are too quiet to be heard
     local ref = mobile.reference
-    local sex = ref.baseObject.female and "f" or "m"
+    local sex = ( ref.baseObject.female and "fe" or "" ) .. "male"
     local race = ref.baseObject.race.id:lower()
-    local directory, soundPath, sound
+    local sound
 
     -- ordinators have special voices, so here's some hacky shit to incorporate them
     if not ref.baseObject.female and (ref.id:lower():match(ordinator) or ref.object.class.id:lower():match(ordinator)) then
@@ -76,23 +76,17 @@ this.playGuardVoice = function(mobile, type)
 
     -- make sure the race/sex/type combo exists in the voice data
     if this.dialogues.voice[race] and this.dialogues.voice[race][sex] and this.dialogues.voice[race][sex][type] then
-        if race == ordinator then
-            directory = string.format("vo\\%s\\", this.dialogues.voice[race].dir)
-        else
-            directory = string.format("vo\\%s\\%s\\", this.dialogues.voice[race].dir, sex)
-        end
-        sound = table.choice(this.dialogues.voice[race][sex][type])
         -- sound will be nil if the race/sex/type combo is an empty table
-        if sound then soundPath = directory .. sound.file end
+        sound = table.choice(this.dialogues.voice[race][sex][type])
     end
 
     local distanceFromPlayer = math.clamp(mobile.position:distance(tes3.mobilePlayer.position), 0, distanceCap) or 0
     local volume = 1 - (distanceFromPlayer / distanceCap)
 
     -- LuaFormatter off
-    if soundPath then
+    if sound then
         tes3.say({
-            soundPath = soundPath,
+            soundPath = sound.file,
             subtitle = sound.subtitle,
             volume = volume,
             reference = mobile
@@ -100,7 +94,7 @@ this.playGuardVoice = function(mobile, type)
     end
     -- LuaFormatter on
 
-    return soundPath
+    return sound.file
 end
 
 -- }}}
