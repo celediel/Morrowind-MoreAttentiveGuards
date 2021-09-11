@@ -157,15 +157,16 @@ template:createExclusionsPage({
     description = "Members of these factions will not help the player in combat",
     showAllBlocked = false,
     filters = {
-        { label = "Factions", callback = function()
-            local factions = {}
+        {
+            label = "Factions",
+            callback = function()
+                local factions = {}
 
-            for _, faction in pairs(tes3.dataHandler.nonDynamicData.factions) do
-                table.insert(factions, faction.id)
+                for _, faction in pairs(tes3.dataHandler.nonDynamicData.factions) do table.insert(factions, faction.id) end
+
+                return factions
             end
-
-            return factions
-        end }
+        }
     },
     variable = createTableVar("ignoredFactions")
 })
