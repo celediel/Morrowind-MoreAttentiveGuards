@@ -115,15 +115,15 @@ end
 local function factionHelperChecks(npc)
     if not config.factionMembersHelp then return false end
 
-    if not genericNPCChecks(npc) then return false end
-
-    -- now that that's out of the way
     local name = npc.object.name
     local npcFaction = npc.object.faction
 
     if not npcFaction then return false end
     if not npcFaction.playerJoined then return false end
 
+    if not genericNPCChecks(npc) then return false end
+
+    -- now that that's out of the way
     if config.ignoredFactions[npcFaction.id] then
         log("Ignored faction %s, not alerting %s", npcFaction, name)
         return false
