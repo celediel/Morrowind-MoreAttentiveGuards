@@ -30,7 +30,7 @@ end
 
 local function doChecks(e)
     if not config.sneakEnable then return false end
-    if not tes3.mobilePlayer.isSneaking then return false end
+    if not e.target.isSneaking then return false end
     if not e.detector.object.isGuard then return false end
     if e.target ~= tes3.mobilePlayer then return false end
 
